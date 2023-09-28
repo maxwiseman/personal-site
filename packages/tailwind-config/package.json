@@ -1,0 +1,13 @@
+{
+  "name": "tailwind-config",
+  "license": "MIT",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "web.ts"
+  ],
+  "dependencies": {
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}
