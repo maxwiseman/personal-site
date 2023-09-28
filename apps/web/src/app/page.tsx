@@ -5,13 +5,13 @@ export default function Page(): JSX.Element {
   return (
     <>
       <Lenis />
-      <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
-      <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
+      <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-1/2 md:left-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
+      <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-1/2 md:left-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
       <div
         className="w-screen min-h-screen backdrop-blur-[100px] z-30"
         style={{ backgroundImage: "url('/square.png')" }}
       >
-        <div className=" z-50 w-screen md:w-1/2 h-screen flex flex-col justify-center items-center px-10">
+        <div className=" z-50 w-screen max-h-screen md:w-1/2 h-screen flex flex-col justify-center items-center px-10">
           <div>
             <h1 className="font-mono font-medium text-8xl w-min max-w-full">
               Max Wiseman
@@ -23,13 +23,24 @@ export default function Page(): JSX.Element {
         </div>
         <div className="w-screen min-h-screen p-24 flex flex-col gap-16 justify-center items-center">
           <h2 className="font-mono text-5xl font-medium">Projects</h2>
-          <div className="flex gap-5 flex-wrap md:flex-nowrap">
+          <div
+            // className="gap-5 flex flex-row flex-wrap justify-center"
+            className="gap-5 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3"
+          >
             <ProjectCard
               links={[
                 {
                   type: "github",
                   content: "https://github.com/maxwiseman/Scholarly",
                 },
+              ]}
+              technology={[
+                "vercel",
+                "next",
+                "react",
+                "drizzle",
+                "neon",
+                "cloudflare",
               ]}
               title="Schoarly"
             >
@@ -45,6 +56,7 @@ export default function Page(): JSX.Element {
                   content: "https://github.com/maxwiseman/personal-site",
                 },
               ]}
+              technology={["vercel", "next", "react", "cloudflare"]}
               title="Personal Site"
             >
               Commodo sit in quis eu mollit dolor. Excepteur ea reprehenderit
@@ -64,6 +76,14 @@ export default function Page(): JSX.Element {
                   type: "link",
                   content: "https://flashcards.maxwiseman.io",
                 },
+              ]}
+              technology={[
+                "vercel",
+                "next",
+                "react",
+                "drizzle",
+                "planetscale",
+                "cloudflare",
               ]}
               title="Flashcards"
             >
