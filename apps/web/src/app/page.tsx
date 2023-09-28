@@ -11,9 +11,9 @@ export default function Page(): JSX.Element {
         className="w-screen min-h-screen backdrop-blur-[100px] z-30"
         style={{ backgroundImage: "url('/square.png')" }}
       >
-        <div className=" z-50 w-screen max-h-screen md:w-1/2 h-screen flex flex-col justify-center items-center px-10">
+        <div className="z-50 w-screen max-h-screen md:w-1/2 h-screen flex flex-col justify-center items-center px-10">
           <div>
-            <h1 className="font-mono font-medium text-8xl w-min max-w-full">
+            <h1 className="font-mono font-medium lg:text-8xl md:text-7xl text-6xl w-min max-w-full">
               Max Wiseman
             </h1>
             <address className="font-mono not-italic w-max text-3xl">
@@ -21,11 +21,11 @@ export default function Page(): JSX.Element {
             </address>
           </div>
         </div>
-        <div className="w-screen min-h-screen p-24 flex flex-col gap-16 justify-center items-center">
+        <div className="w-screen min-h-screen p-5 md:p-24 flex flex-col gap-16 justify-center items-center">
           <h2 className="font-mono text-5xl font-medium">Projects</h2>
           <div
             // className="gap-5 flex flex-row flex-wrap justify-center"
-            className="gap-5 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3"
+            className="gap-5 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3 h-max"
           >
             <ProjectCard
               links={[

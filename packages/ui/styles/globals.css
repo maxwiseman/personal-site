@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: inherit;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
