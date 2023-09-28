@@ -17,7 +17,7 @@ export function ProjectCard({
   children?: React.ReactNode;
 }): JSX.Element {
   return (
-    <Card className="min-h-max w-full max-w-max p-6">
+    <Card className="min-h-max w-full h-max p-6">
       {title ? (
         <>
           <CardTitle className="text-xl flex flex-row flex-wrap gap-2 justify-between items-center pb-1">
@@ -39,7 +39,7 @@ export function ProjectCard({
               })}
             </div>
           </CardTitle>
-          <Separator className="my-2" />
+          <Separator className="my-3" />
         </>
       ) : null}
       <CardContent className="p-0 pt-0">{children}</CardContent>
