@@ -94,6 +94,23 @@ export default function Page(): JSX.Element {
               occaecat dolor eiusmod magna anim nisi fugiat. Non voluptate quis
               ullamco in. Tempor excepteur tempor tempor ut quis.
             </ProjectCard>
+            <ProjectCard
+              links={[
+                {
+                  type: "github",
+                  content: "https://github.com/maxwiseman/Serge-Frontend",
+                },
+              ]}
+              technology={["vercel", "next", "react", "ai", "cloudflare"]}
+              title="LLaMa Frontend"
+            >
+              Culpa exercitation tempor sint aliqua sint est. Ipsum laborum
+              excepteur nostrud magna ea adipisicing reprehenderit ea nisi.
+              Eiusmod laborum minim irure voluptate cupidatat Lorem ea occaecat
+              culpa culpa. Nulla velit do fugiat irure mollit ipsum cupidatat
+              occaecat dolor eiusmod magna anim nisi fugiat. Non voluptate quis
+              ullamco in. Tempor excepteur tempor tempor ut quis.
+            </ProjectCard>
           </div>
         </div>
       </div>

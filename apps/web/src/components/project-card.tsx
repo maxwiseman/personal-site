@@ -2,6 +2,7 @@ import { GitHubLogoIcon, Link2Icon } from "@radix-ui/react-icons";
 import {
   IconBrandCloudflare,
   IconBrandNextjs,
+  IconBrandOpenai,
   IconBrandPlanetscale,
   IconBrandReact,
   IconBrandVercel,
@@ -34,6 +35,7 @@ export function ProjectCard({
     | "planetscale"
     | "neon"
     | "cloudflare"
+    | "ai"
   )[];
   links?: {
     type: "github" | "link";
@@ -49,6 +51,7 @@ export function ProjectCard({
     planetscale: Technology;
     neon: Technology;
     cloudflare: Technology;
+    ai: Technology;
   } = {
     vercel: {
       icon: <IconBrandVercel />,
@@ -77,6 +80,10 @@ export function ProjectCard({
     cloudflare: {
       icon: <IconBrandCloudflare />,
       name: "Cloudflare",
+    },
+    ai: {
+      icon: <IconBrandOpenai />,
+      name: "AI",
     },
   };
   technology?.sort();
