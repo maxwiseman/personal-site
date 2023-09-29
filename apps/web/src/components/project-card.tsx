@@ -19,6 +19,11 @@ import {
   CardTitle,
 } from "ui/components/ui/card";
 import { Separator } from "ui/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "ui/components/ui/tooltip";
 
 export function ProjectCard({
   title,
@@ -98,16 +103,24 @@ export function ProjectCard({
               <div className="w-max flex flex-row flex-nowrap gap-2">
                 {links?.map(link => {
                   return (
-                    <Link href={link.content} key={link.type} target="blank">
-                      <Button size="icon" variant="outline">
-                        {link.type === "github" && (
-                          <GitHubLogoIcon className="w-4 h-4" />
-                        )}
-                        {link.type === "link" && (
-                          <Link2Icon className="w-4 h-4" />
-                        )}
-                      </Button>
-                    </Link>
+                    <Tooltip key={link.type}>
+                      <TooltipTrigger asChild>
+                        <Link href={link.content} target="blank">
+                          <Button size="icon" variant="outline">
+                            {link.type === "github" && (
+                              <GitHubLogoIcon className="w-4 h-4" />
+                            )}
+                            {link.type === "link" && (
+                              <Link2Icon className="w-4 h-4" />
+                            )}
+                          </Button>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        {link.type === "github" && "View on GitHub"}
+                        {link.type === "link" && "View deployment"}
+                      </TooltipContent>
+                    </Tooltip>
                   );
                 })}
               </div>
