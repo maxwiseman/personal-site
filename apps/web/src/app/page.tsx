@@ -43,7 +43,7 @@ export default function Page(): JSX.Element {
                 "cloudflare",
                 "tailwind",
               ]}
-              title="Schoarly"
+              title="Scholarly"
             >
               Labore eiusmod culpa fugiat non est ex culpa laborum laboris
               cupidatat ad veniam. Irure nisi in quis anim deserunt fugiat ad
