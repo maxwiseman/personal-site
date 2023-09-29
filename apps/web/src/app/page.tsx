@@ -1,7 +1,46 @@
 import { Lenis } from "../components/lenis";
 import { ProjectCard } from "../components/project-card";
+import client from "../lib/client";
 
-export default function Page(): JSX.Element {
+interface Project {
+  _createdAt: Date;
+  _updatedAt: Date;
+  _id: string;
+  _rev: string;
+  _type: "project";
+  name: string;
+  slug: { current: string; _type: "slug" };
+  description: string;
+  github: string;
+  link: string;
+  body: Block[];
+  vercel: boolean;
+  react: boolean;
+  next: boolean;
+  drizzle: boolean;
+  planetscale: boolean;
+  neon: boolean;
+  cloudflare: boolean;
+  ai: boolean;
+  tailwind: boolean;
+}
+
+interface Block {
+  _type: "block";
+  children: {
+    _type: string;
+    marks?: [];
+    text?: string;
+    _key?: string;
+    markDefs?: [];
+  }[];
+  markDefs: [];
+  style: "normal";
+}
+
+export default async function Page(): Promise<JSX.Element> {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
+  const projects = (await client.fetch(`*[_type == "project"]`)) as Project[];
   return (
     <>
       <Lenis />
@@ -23,96 +62,26 @@ export default function Page(): JSX.Element {
         </div>
         <div className="w-screen min-h-screen p-5 md:p-24 flex flex-col gap-16 justify-center items-center">
           <h2 className="font-mono text-5xl font-medium">Projects</h2>
-          <div
-            // className="gap-5 flex flex-row flex-wrap justify-center"
-            className="gap-5 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3 h-max"
-          >
-            <ProjectCard
-              links={[
-                {
-                  type: "github",
-                  content: "https://github.com/maxwiseman/Scholarly",
-                },
-              ]}
-              technology={[
-                "vercel",
-                "next",
-                "react",
-                "drizzle",
-                "neon",
-                "cloudflare",
-                "tailwind",
-              ]}
-              title="Scholarly"
-            >
-              Labore eiusmod culpa fugiat non est ex culpa laborum laboris
-              cupidatat ad veniam. Irure nisi in quis anim deserunt fugiat ad
-              aliquip ipsum. Reprehenderit et ullamco duis minim cupidatat magna
-              occaecat id irure enim ad.
-            </ProjectCard>
-            <ProjectCard
-              links={[
-                {
-                  type: "github",
-                  content: "https://github.com/maxwiseman/personal-site",
-                },
-              ]}
-              technology={["vercel", "next", "react", "cloudflare", "tailwind"]}
-              title="Personal Site"
-            >
-              Commodo sit in quis eu mollit dolor. Excepteur ea reprehenderit
-              incididunt consequat nostrud. Magna occaecat anim duis do sit
-              consectetur aliqua. Est est id Lorem veniam consectetur culpa
-              officia duis enim cillum. Amet labore eu dolor est veniam id aute
-              deserunt est proident elit irure. Ullamco dolor ea elit ex qui.
-              Sunt magna irure culpa elit aliqua nisi ea ex ea.
-            </ProjectCard>
-            <ProjectCard
-              links={[
-                {
-                  type: "github",
-                  content: "https://github.com/maxwiseman/flashcards-v2",
-                },
-                {
-                  type: "link",
-                  content: "https://flashcards.maxwiseman.io",
-                },
-              ]}
-              technology={[
-                "vercel",
-                "next",
-                "react",
-                "drizzle",
-                "planetscale",
-                "cloudflare",
-                "tailwind",
-              ]}
-              title="Flashcards"
-            >
-              Culpa exercitation tempor sint aliqua sint est. Ipsum laborum
-              excepteur nostrud magna ea adipisicing reprehenderit ea nisi.
-              Eiusmod laborum minim irure voluptate cupidatat Lorem ea occaecat
-              culpa culpa. Nulla velit do fugiat irure mollit ipsum cupidatat
-              occaecat dolor eiusmod magna anim nisi fugiat. Non voluptate quis
-              ullamco in. Tempor excepteur tempor tempor ut quis.
-            </ProjectCard>
-            <ProjectCard
-              links={[
-                {
-                  type: "github",
-                  content: "https://github.com/maxwiseman/Serge-Frontend",
-                },
-              ]}
-              technology={["vercel", "next", "react", "ai", "cloudflare"]}
-              title="LLaMa Frontend"
-            >
-              Culpa exercitation tempor sint aliqua sint est. Ipsum laborum
-              excepteur nostrud magna ea adipisicing reprehenderit ea nisi.
-              Eiusmod laborum minim irure voluptate cupidatat Lorem ea occaecat
-              culpa culpa. Nulla velit do fugiat irure mollit ipsum cupidatat
-              occaecat dolor eiusmod magna anim nisi fugiat. Non voluptate quis
-              ullamco in. Tempor excepteur tempor tempor ut quis.
-            </ProjectCard>
+          <div className="gap-5 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3 h-max">
+            {projects.map(project => {
+              return (
+                <ProjectCard
+                  key={project.slug.current}
+                  links={[
+                    {
+                      type: "github",
+                      content: project.github,
+                    },
+                    { type: "link", content: project.link },
+                  ]}
+                  slug={project.slug.current}
+                  technology={project}
+                  title={project.name}
+                >
+                  {project.description}
+                </ProjectCard>
+              );
+            })}
           </div>
         </div>
       </div>
