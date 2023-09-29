@@ -41,6 +41,7 @@ export default function Page(): JSX.Element {
                 "drizzle",
                 "neon",
                 "cloudflare",
+                "tailwind",
               ]}
               title="Schoarly"
             >
@@ -56,7 +57,7 @@ export default function Page(): JSX.Element {
                   content: "https://github.com/maxwiseman/personal-site",
                 },
               ]}
-              technology={["vercel", "next", "react", "cloudflare"]}
+              technology={["vercel", "next", "react", "cloudflare", "tailwind"]}
               title="Personal Site"
             >
               Commodo sit in quis eu mollit dolor. Excepteur ea reprehenderit
@@ -84,6 +85,7 @@ export default function Page(): JSX.Element {
                 "drizzle",
                 "planetscale",
                 "cloudflare",
+                "tailwind",
               ]}
               title="Flashcards"
             >

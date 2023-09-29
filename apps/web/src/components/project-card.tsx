@@ -5,6 +5,7 @@ import {
   IconBrandOpenai,
   IconBrandPlanetscale,
   IconBrandReact,
+  IconBrandTailwind,
   IconBrandVercel,
   IconCloudRain,
   IconLetterN,
@@ -41,6 +42,7 @@ export function ProjectCard({
     | "neon"
     | "cloudflare"
     | "ai"
+    | "tailwind"
   )[];
   links?: {
     type: "github" | "link";
@@ -57,6 +59,7 @@ export function ProjectCard({
     neon: Technology;
     cloudflare: Technology;
     ai: Technology;
+    tailwind: Technology;
   } = {
     vercel: {
       icon: <IconBrandVercel />,
@@ -89,6 +92,10 @@ export function ProjectCard({
     ai: {
       icon: <IconBrandOpenai />,
       name: "AI",
+    },
+    tailwind: {
+      icon: <IconBrandTailwind />,
+      name: "Tailwind CSS",
     },
   };
   technology?.sort();
