@@ -1,6 +1,14 @@
+import type {
+  PortableTextMarkComponentProps,
+  PortableTextTypeComponentProps,
+} from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
+import Link from "next/link";
+import { cn } from "ui/lib/utils";
 import { Lenis } from "../../../components/lenis";
 import client from "../../../lib/client";
+import styles from "./article.module.css";
+import { CodeBlock } from "./code-block";
 
 interface Project {
   _createdAt: Date;
@@ -79,8 +87,38 @@ export default async function Page({
         </div>
 
         <div className="w-full flex justify-center">
-          <article className="max-w-3xl w-full">
-            <PortableText value={project.body} />
+          <article className={cn("max-w-3xl w-full", styles.article)}>
+            <PortableText
+              components={{
+                marks: {
+                  link: (
+                    props: PortableTextMarkComponentProps<{
+                      _type: "link";
+                      href: URL;
+                    }>
+                  ): JSX.Element => {
+                    return (
+                      <Link href={props.value?.href || ""}>{props.text}</Link>
+                    );
+                  },
+                },
+                types: {
+                  code: (
+                    props: PortableTextTypeComponentProps<{
+                      code: string;
+                      language: string;
+                    }>
+                  ): JSX.Element => {
+                    return (
+                      <CodeBlock language={props.value.language}>
+                        {props.value.code}
+                      </CodeBlock>
+                    );
+                  },
+                },
+              }}
+              value={project.body}
+            />
           </article>
         </div>
       </div>

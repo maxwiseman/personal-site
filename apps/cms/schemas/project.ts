@@ -33,7 +33,18 @@ export default {
       type: 'array',
       title: 'Body',
       validation: (Rule: any) => Rule.required(),
-      of: [{type: 'block'}],
+      of: [
+        {type: 'block'},
+        {
+          name: 'code',
+          title: 'Code Block',
+          type: 'code',
+          options: {
+            withFilename: true, // optional
+            highlightedLines: true, // optional
+          },
+        },
+      ],
     },
     {name: 'vercel', title: 'Vercel', type: 'boolean', initialValue: false},
     {name: 'react', title: 'React', type: 'boolean', initialValue: false},

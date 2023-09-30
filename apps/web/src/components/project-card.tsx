@@ -62,21 +62,20 @@ export function ProjectCard({
               <span className="w-max">{title}</span>
               <div className="w-max flex flex-row flex-nowrap gap-2">
                 {links?.map(link => {
+                  if (link.content === undefined) return null;
                   return (
                     <Tooltip key={link.type}>
                       <TooltipTrigger asChild>
-                        {link.content !== undefined && (
-                          <Link href={link.content} target="blank">
-                            <Button size="icon" variant="outline">
-                              {link.type === "github" && (
-                                <GitHubLogoIcon className="w-4 h-4" />
-                              )}
-                              {link.type === "link" && (
-                                <Link2Icon className="w-4 h-4" />
-                              )}
-                            </Button>
-                          </Link>
-                        )}
+                        <Link href={link.content} target="blank">
+                          <Button size="icon" variant="outline">
+                            {link.type === "github" && (
+                              <GitHubLogoIcon className="w-4 h-4" />
+                            )}
+                            {link.type === "link" && (
+                              <Link2Icon className="w-4 h-4" />
+                            )}
+                          </Button>
+                        </Link>
                       </TooltipTrigger>
                       <TooltipContent>
                         {link.type === "github" && "View on GitHub"}
@@ -125,7 +124,7 @@ export function ProjectCard({
                 )}
             </div>
             <Link
-              className="flex flex-row flex-nowrap items-center gap-1 hover:gap-2 transition-[gap]  mt-6"
+              className="flex flex-row flex-nowrap items-center gap-1 hover:gap-2 transition-[gap] ease-in-out  mt-6"
               href={`/projects/${slug}`}
             >
               Learn More <IconArrowRight className="w-4 h-4" />
