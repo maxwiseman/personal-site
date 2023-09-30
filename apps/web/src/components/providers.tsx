@@ -3,6 +3,7 @@
 import { TooltipProvider } from "ui/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "ui/components/ui/toaster";
 
 export function Providers({
   children,
@@ -12,6 +13,7 @@ export function Providers({
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <Analytics />
+      <Toaster />
       <TooltipProvider>{children}</TooltipProvider>
     </ThemeProvider>
   );

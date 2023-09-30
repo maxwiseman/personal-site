@@ -107,10 +107,15 @@ export default async function Page({
                     props: PortableTextTypeComponentProps<{
                       code: string;
                       language: string;
+                      filename: string;
                     }>
                   ): JSX.Element => {
                     return (
-                      <CodeBlock language={props.value.language}>
+                      <CodeBlock
+                        content={props.value.code}
+                        fileName={props.value.filename}
+                        language={props.value.language}
+                      >
                         {props.value.code}
                       </CodeBlock>
                     );
