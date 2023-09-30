@@ -31,9 +31,9 @@ export function CodeBlock({
           <Separator className="my-3" />
         </>
       ) : (
-        <div className="h-6" />
+        <div className="h-3" />
       )}
-      <CardContent className="relative mb-3 pb-0 flex items-center min-h-[36px] overflow-x-scroll">
+      <div className="relative">
         <Button
           className="absolute right-6 top-0 bg-card"
           onClick={() => {
@@ -60,8 +60,10 @@ export function CodeBlock({
         >
           <IconClipboardCopy className="w-4 h-4" />
         </Button>
-        <Highlight className={cn("!p-0", language)}>{children}</Highlight>
-      </CardContent>
+        <CardContent className="mb-3 pb-0 flex items-center min-h-[36px] overflow-x-scroll">
+          <Highlight className={cn("!p-0", language)}>{children}</Highlight>
+        </CardContent>
+      </div>
     </Card>
   );
 }
