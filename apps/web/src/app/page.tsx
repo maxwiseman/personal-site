@@ -49,8 +49,10 @@ export default async function Page(): Promise<JSX.Element> {
       <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-1/2 md:left-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
       <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-1/2 md:left-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
       <div
-        className="w-screen min-h-screen backdrop-blur-[100px] z-30"
-        style={{ backgroundImage: "url('/square.png')" }}
+        className="w-screen min-h-screen backdrop-blur-[100px] z-30 bg-[url('/square.svg')] dark:bg-[url('/square_dark.svg')] bg-center"
+        style={{
+          backgroundSize: "33px",
+        }}
       >
         <div className="z-50 w-screen max-h-screen md:w-1/2 h-screen flex flex-col justify-center items-center px-10">
           <div>

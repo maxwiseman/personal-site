@@ -74,8 +74,10 @@ export default async function Page({
       <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
       <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
       <div
-        className="w-screen min-h-screen backdrop-blur-[100px]"
-        style={{ backgroundImage: "url('/square.png')" }}
+        className="w-screen min-h-screen backdrop-blur-[100px] bg-[url('/square.svg')] dark:bg-[url('/square_dark.svg')] bg-center"
+        style={{
+          backgroundSize: "33px",
+        }}
       >
         <div className="w-screen max-h-screen h-screen flex flex-col justify-center items-center px-10">
           <h1 className="font-mono font-medium lg:text-8xl md:text-7xl text-6xl w-full max-w-full text-center">
