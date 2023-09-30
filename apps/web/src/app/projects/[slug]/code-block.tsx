@@ -1,6 +1,8 @@
 "use client";
 import { IconClipboardCopy } from "@tabler/icons-react";
-import "highlight.js/styles/github.css";
+// import "highlight.js/styles/github.css";
+import { useTheme } from "next-themes";
+import { Suspense, lazy } from "react";
 import Highlight from "react-highlight";
 import { Button } from "ui/components/ui/button";
 import { Card, CardContent, CardHeader } from "ui/components/ui/card";
@@ -20,6 +22,10 @@ export function CodeBlock({
   fileName?: string;
 }): JSX.Element {
   const { toast } = useToast();
+  const { theme } = useTheme();
+
+  const LightTheme = lazy(() => import("./light"));
+  const DarkTheme = lazy(() => import("./dark"));
 
   return (
     <Card className="overflow-hidden my-6">
@@ -61,7 +67,13 @@ export function CodeBlock({
           <IconClipboardCopy className="w-4 h-4" />
         </Button>
         <CardContent className="mb-3 pb-0 flex items-center min-h-[36px] overflow-x-scroll">
-          <Highlight className={cn("!p-0", language)}>{children}</Highlight>
+          <Suspense>
+            {theme === "light" ? <LightTheme /> : null}
+            {theme === "dark" ? <DarkTheme /> : null}
+          </Suspense>
+          <Highlight className={cn("!p-0 !bg-card", language)}>
+            {children}
+          </Highlight>
         </CardContent>
       </div>
     </Card>

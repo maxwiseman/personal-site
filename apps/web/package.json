@@ -14,6 +14,7 @@
     "@sanity/client": "^6.4.12",
     "@studio-freight/react-lenis": "^0.0.36",
     "@tabler/icons-react": "^2.37.0",
+    "@types/react-highlight": "^0.12.6",
     "@vercel/analytics": "^1.0.2",
     "highlight.js": "^11.8.0",
     "next": "^13.4.19",

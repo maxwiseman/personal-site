@@ -124,6 +124,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^2.37.0
         version: 2.37.0(react@18.2.0)
+      '@types/react-highlight':
+        specifier: ^0.12.6
+        version: 0.12.6
       '@vercel/analytics':
         specifier: ^1.0.2
         version: 1.0.2
@@ -3832,6 +3835,12 @@ packages:
     resolution: {integrity: sha512-hxXEXWxFJXbY0LMj/T69mznqOZJXNtQMqVxIiirVAZnnpeYiD4zt+lPsgcr/cfWg2VLsxZ1y26vigG03prYB+Q==}
     dependencies:
       '@types/react': 18.2.5
+
+  /@types/react-highlight@0.12.6:
+    resolution: {integrity: sha512-mT09xsLcKhsytXkx7jOIYPl/tJjbajupnG1/ElBMnudDMMUGhqqCt2RIHnK5ycuqGYoOgIIoMVnLInlUk/WQDA==}
+    dependencies:
+      '@types/react': 18.2.5
+    dev: false
 
   /@types/react-is@18.2.2:
     resolution: {integrity: sha512-bNmRDADVsOivYLvqYQATYRbf60SlK++spu97SK65pSCjdtuTqczFexBQtOK+gQdG6cqOsvQZ3mR12ueEoaq5iA==}
