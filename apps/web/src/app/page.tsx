@@ -38,6 +38,9 @@ interface Block {
   style: "normal";
 }
 
+export function generateStaticParams(): [] {
+  return [];
+}
 export const revalidate = 43200;
 
 export default async function Page(): Promise<JSX.Element> {
