@@ -41,11 +41,15 @@ interface Block {
 export function generateStaticParams(): [] {
   return [];
 }
-export const revalidate = 43200;
+export const revalidate = 14400;
 
 export default async function Page(): Promise<JSX.Element> {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
-  const projects = (await client.fetch(`*[_type == "project"]`)) as Project[];
+  const projects = (await client.fetch(
+    `*[_type == "project"]`,
+    {},
+    { cache: "no-cache" }
+  )) as Project[];
   return (
     <>
       <Lenis />

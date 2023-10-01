@@ -46,7 +46,7 @@ interface Block {
   style: "normal";
 }
 
-export const revalidate = 3600;
+export const revalidate = 14400;
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
