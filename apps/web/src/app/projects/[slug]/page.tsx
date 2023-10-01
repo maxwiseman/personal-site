@@ -53,7 +53,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const projects = (await client.fetch(
     `*[_type == "project"]`,
     {},
-    { cache: "no-cache" }
+    { next: { revalidate: 14400 } }
   )) as Project[];
   const projectSlugs = projects.map(project => {
     return { slug: project.slug.current };

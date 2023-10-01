@@ -48,7 +48,7 @@ export default async function Page(): Promise<JSX.Element> {
   const projects = (await client.fetch(
     `*[_type == "project"]`,
     {},
-    { cache: "no-cache" }
+    { next: { revalidate: 14400 } }
   )) as Project[];
   return (
     <>
