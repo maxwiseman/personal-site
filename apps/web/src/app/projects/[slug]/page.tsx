@@ -71,8 +71,10 @@ export default async function Page({
   return (
     <>
       <Lenis />
-      <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45 blur-[100px] -z-10" />
-      <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45 blur-[100px] -z-10" />
+      <div className="blur-[100px] absolute w-screen h-screen -z-10">
+        <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
+        <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
+      </div>
       <div
         className="w-screen min-h-screen bg-[url('/square.svg')] dark:bg-[url('/square_dark.svg')] bg-center"
         style={{
