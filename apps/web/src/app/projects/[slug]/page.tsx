@@ -46,11 +46,15 @@ interface Block {
   style: "normal";
 }
 
-export const revalidate = 43200;
+export const revalidate = 3600;
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
-  const projects = (await client.fetch(`*[_type == "project"]`)) as Project[];
+  const projects = (await client.fetch(
+    `*[_type == "project"]`,
+    {},
+    { cache: "no-cache" }
+  )) as Project[];
   const projectSlugs = projects.map(project => {
     return { slug: project.slug.current };
   });
