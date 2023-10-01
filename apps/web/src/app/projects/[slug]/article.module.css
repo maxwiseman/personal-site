@@ -49,6 +49,8 @@
   padding: 20px;
   border-radius: 5px;
   border-left: 3px hsl(var(--muted-foreground)) solid;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .article a {
