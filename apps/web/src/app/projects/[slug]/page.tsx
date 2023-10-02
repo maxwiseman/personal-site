@@ -5,10 +5,10 @@ import type {
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { cn } from "ui/lib/utils";
+import { CodeBlock } from "../../../components/code-block";
 import { Lenis } from "../../../components/lenis";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
-import { CodeBlock } from "./code-block";
 
 interface Project {
   _createdAt: Date;

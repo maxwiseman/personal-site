@@ -31,8 +31,8 @@ export function CodeBlock({
   const { toast } = useToast();
   const { theme } = useTheme();
 
-  const LightTheme = lazy(() => import("./light"));
-  const DarkTheme = lazy(() => import("./dark"));
+  const LightTheme = lazy(() => import("../app/projects/[slug]/light"));
+  const DarkTheme = lazy(() => import("../app/projects/[slug]/dark"));
 
   return (
     <Card className="overflow-hidden my-6">
