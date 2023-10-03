@@ -1,8 +1,10 @@
+import { BlogPost } from "../components/blog";
+import { BlogCard } from "../components/blog-card";
 import { Lenis } from "../components/lenis";
 import { ProjectCard } from "../components/project-card";
 import client from "../lib/client";
 
-interface Project {
+export interface Project {
   _createdAt: Date;
   _updatedAt: Date;
   _id: string;
@@ -14,15 +16,17 @@ interface Project {
   github: string;
   link: string;
   body: Block[];
-  vercel: boolean;
-  react: boolean;
-  next: boolean;
-  drizzle: boolean;
-  planetscale: boolean;
-  neon: boolean;
-  cloudflare: boolean;
-  ai: boolean;
-  tailwind: boolean;
+  stack: {
+    vercel: boolean;
+    react: boolean;
+    next: boolean;
+    drizzle: boolean;
+    planetscale: boolean;
+    neon: boolean;
+    cloudflare: boolean;
+    ai: boolean;
+    tailwind: boolean;
+  };
 }
 
 interface Block {
@@ -50,6 +54,12 @@ export default async function Page(): Promise<JSX.Element> {
     {},
     { next: { revalidate: 14400 } }
   )) as Project[];
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
+  const blogPosts = (await client.fetch(
+    `*[_type == "blog-post"]`,
+    {},
+    { next: { revalidate: 14400 } }
+  )) as BlogPost[];
   return (
     <>
       <Lenis />
@@ -88,12 +98,20 @@ export default async function Page(): Promise<JSX.Element> {
                     { type: "link", content: project.link },
                   ]}
                   slug={project.slug.current}
-                  technology={project}
+                  technology={project.stack}
                   title={project.name}
                 >
                   {project.description}
                 </ProjectCard>
               );
+            })}
+          </div>
+        </div>
+        <div className="w-screen min-h-screen p-5 md:p-24 flex flex-col gap-16 justify-center items-center">
+          <h2 className="font-mono text-5xl font-medium">Blog</h2>
+          <div className="gap-5 h-max w-full">
+            {blogPosts.map(post => {
+              return <BlogCard key={post._id} post={post} />;
             })}
           </div>
         </div>

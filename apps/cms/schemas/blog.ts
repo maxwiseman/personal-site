@@ -1,7 +1,7 @@
 export default {
-  name: 'project',
+  name: 'blog-post',
   type: 'document',
-  title: 'Project',
+  title: 'Blog Post',
   fields: [
     {
       name: 'name',
@@ -20,14 +20,16 @@ export default {
       },
     },
     {
+      name: 'cover',
+      type: 'image',
+    },
+    {
       name: 'description',
       type: 'text',
       title: 'Description',
       rows: 3,
       validation: (Rule: any) => Rule.required().min(10).max(200),
     },
-    {name: 'github', title: 'Github', type: 'url'},
-    {name: 'link', title: 'Link', type: 'url'},
     {
       name: 'body',
       type: 'array',
@@ -44,22 +46,6 @@ export default {
             highlightedLines: true, // optional
           },
         },
-      ],
-    },
-    {
-      name: 'stack',
-      type: 'object',
-      title: 'Tech Stack',
-      fields: [
-        {name: 'vercel', title: 'Vercel', type: 'boolean', initialValue: false},
-        {name: 'react', title: 'React', type: 'boolean', initialValue: false},
-        {name: 'next', title: 'Next.JS', type: 'boolean', initialValue: false},
-        {name: 'drizzle', title: 'Drizzle ORM', type: 'boolean', initialValue: false},
-        {name: 'planetscale', title: 'Planetscale', type: 'boolean', initialValue: false},
-        {name: 'neon', title: 'Neon', type: 'boolean', initialValue: false},
-        {name: 'cloudflare', title: 'Cloudflare', type: 'boolean', initialValue: false},
-        {name: 'ai', title: 'AI', type: 'boolean', initialValue: false},
-        {name: 'tailwind', title: 'Tailwind CSS', type: 'boolean', initialValue: false},
       ],
     },
   ],

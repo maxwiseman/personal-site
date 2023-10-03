@@ -118,6 +118,9 @@ importers:
       '@sanity/client':
         specifier: ^6.4.12
         version: 6.4.12
+      '@sanity/image-url':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@studio-freight/react-lenis':
         specifier: ^0.0.36
         version: 0.0.36(@types/react@18.2.5)(react-dom@18.2.0)(react@18.2.0)
