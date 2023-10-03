@@ -1,4 +1,4 @@
-import { BlogPost } from "../components/blog";
+import type { BlogPost } from "../components/blog";
 import { BlogCard } from "../components/blog-card";
 import { Lenis } from "../components/lenis";
 import { ProjectCard } from "../components/project-card";
@@ -52,41 +52,41 @@ export default async function Page(): Promise<JSX.Element> {
   const projects = (await client.fetch(
     `*[_type == "project"]`,
     {},
-    { next: { revalidate: 14400 } }
+    { next: { revalidate: 14400 } },
   )) as Project[];
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
   const blogPosts = (await client.fetch(
     `*[_type == "blog-post"]`,
     {},
-    { next: { revalidate: 14400 } }
+    { next: { revalidate: 14400 } },
   )) as BlogPost[];
   return (
     <>
       <Lenis />
-      <div className="blur-[100px] absolute w-screen h-screen -z-10">
-        <div className="bg-[#33CCFC] w-1/6 max-w-screen h-4/6 absolute top-[50%] left-1/2 md:left-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
-        <div className="bg-[#FE43EB] w-[10%] max-w-screen h-3/6 absolute top-[60%] left-1/2 md:left-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
+      <div className="absolute -z-10 h-screen w-screen blur-[100px]">
+        <div className="max-w-screen absolute left-1/2 top-[50%] h-4/6 w-1/6 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-full bg-[#33CCFC] md:left-[75%]" />
+        <div className="max-w-screen absolute left-1/2 top-[60%] h-3/6 w-[10%] -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-full bg-[#FE43EB] md:left-[80%]" />
       </div>
       <div
-        className="w-screen max-w-screen min-h-screen z-30 bg-[url('/square.svg')] dark:bg-[url('/square_dark.svg')] bg-center"
+        className="max-w-screen z-30 min-h-screen w-screen bg-[url('/square.svg')] bg-center dark:bg-[url('/square_dark.svg')]"
         style={{
           backgroundSize: "33px",
         }}
       >
-        <div className="z-50 w-screen max-h-screen md:w-1/2 h-screen flex flex-col justify-center items-center px-10">
+        <div className="z-50 flex h-screen max-h-screen w-screen flex-col items-center justify-center px-10 md:w-1/2">
           <div>
-            <h1 className="font-mono font-medium lg:text-8xl md:text-7xl text-6xl w-min max-w-full">
+            <h1 className="w-min max-w-full font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
               Max Wiseman
             </h1>
-            <address className="font-mono not-italic w-max text-3xl">
+            <address className="w-max font-mono text-3xl not-italic">
               Knoxville, TN
             </address>
           </div>
         </div>
-        <div className="w-screen min-h-screen p-5 md:p-24 flex flex-col gap-16 justify-center items-center">
+        <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
           <h2 className="font-mono text-5xl font-medium">Projects</h2>
-          <div className="gap-5 grid grid-flow-row md:grid-cols-2 lg:grid-cols-3 h-max">
-            {projects.map(project => {
+          <div className="grid h-max grid-flow-row gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project) => {
               return (
                 <ProjectCard
                   key={project.slug.current}
@@ -107,10 +107,10 @@ export default async function Page(): Promise<JSX.Element> {
             })}
           </div>
         </div>
-        <div className="w-screen min-h-screen p-5 md:p-24 flex flex-col gap-16 justify-center items-center">
+        <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
           <h2 className="font-mono text-5xl font-medium">Blog</h2>
-          <div className="gap-5 h-max w-full">
-            {blogPosts.map(post => {
+          <div className="h-max w-full gap-5">
+            {blogPosts.map((post) => {
               return <BlogCard key={post._id} post={post} />;
             })}
           </div>

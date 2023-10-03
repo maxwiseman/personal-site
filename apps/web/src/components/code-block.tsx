@@ -35,13 +35,13 @@ export function CodeBlock({
   const DarkTheme = lazy(() => import("../app/projects/[slug]/dark"));
 
   return (
-    <Card className="overflow-hidden my-6">
+    <Card className="my-6 overflow-hidden">
       {fileName ? (
         <>
-          <CardHeader className="pb-0 pt-3 flex flex-row items-center justify-between">
-            <span className="font-mono text-muted-foreground flex flex-row items-center gap-1">
+          <CardHeader className="flex flex-row items-center justify-between pb-0 pt-3">
+            <span className="flex flex-row items-center gap-1 font-mono text-muted-foreground">
               {reactStringReplace(fileName, "/", () => {
-                return <SlashIcon className="w-4 h-4" />;
+                return <SlashIcon className="h-4 w-4" />;
               })}
             </span>
           </CardHeader>
@@ -76,17 +76,17 @@ export function CodeBlock({
               size="icon"
               variant="outline"
             >
-              <IconClipboardCopy className="w-4 h-4" />
+              <IconClipboardCopy className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Copy to clipboard</TooltipContent>
         </Tooltip>
-        <CardContent className="mb-3 pb-0 flex items-center min-h-[36px] overflow-x-scroll">
+        <CardContent className="mb-3 flex min-h-[36px] items-center overflow-x-scroll pb-0">
           <Suspense>
             {theme === "light" ? <LightTheme /> : null}
             {theme === "dark" ? <DarkTheme /> : null}
           </Suspense>
-          <Highlight className={cn("!p-0 !bg-card", language)}>
+          <Highlight className={cn("!bg-card !p-0", language)}>
             {children}
           </Highlight>
         </CardContent>

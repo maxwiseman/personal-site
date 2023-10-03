@@ -54,14 +54,14 @@ export function ProjectCard({
   children?: React.ReactNode;
 }): JSX.Element {
   return (
-    <Card className="min-h-max w-full min-w-[250px] p-6 relative h-max">
+    <Card className="relative h-max min-h-max w-full min-w-[250px] p-6">
       <CardContent className="p-0 pt-0">
         {title ? (
           <>
-            <CardTitle className="text-xl flex flex-row flex-wrap gap-2 justify-between items-center pb-1">
+            <CardTitle className="flex flex-row flex-wrap items-center justify-between gap-2 pb-1 text-xl">
               <span className="w-max">{title}</span>
-              <div className="w-max flex flex-row flex-nowrap gap-2">
-                {links?.map(link => {
+              <div className="flex w-max flex-row flex-nowrap gap-2">
+                {links?.map((link) => {
                   if (link.content === undefined) return null;
                   return (
                     <Tooltip key={link.type}>
@@ -69,10 +69,10 @@ export function ProjectCard({
                         <Link href={link.content} target="blank">
                           <Button size="icon" variant="outline">
                             {link.type === "github" && (
-                              <GitHubLogoIcon className="w-4 h-4" />
+                              <GitHubLogoIcon className="h-4 w-4" />
                             )}
                             {link.type === "link" && (
-                              <Link2Icon className="w-4 h-4" />
+                              <Link2Icon className="h-4 w-4" />
                             )}
                           </Button>
                         </Link>
@@ -91,9 +91,9 @@ export function ProjectCard({
         ) : null}
         {children}
         {technology ? (
-          <CardFooter className="relative bottom-0 p-0 mt-6 font-medium min-h-max flex-col justify-normal items-start">
+          <CardFooter className="relative bottom-0 mt-6 min-h-max flex-col items-start justify-normal p-0 font-medium">
             Tech Stack:
-            <div className="mt-2 gap-1 flex flex-col flex-wrap w-full">
+            <div className="mt-2 flex w-full flex-col flex-wrap gap-1">
               {Object.keys(technology)
                 .sort()
                 .map(
@@ -107,7 +107,7 @@ export function ProjectCard({
                       | "neon"
                       | "cloudflare"
                       | "ai"
-                      | "tailwind"
+                      | "tailwind",
                   ) => {
                     if (technology[item] === true) {
                       return (
@@ -120,14 +120,14 @@ export function ProjectCard({
                       );
                     }
                     return null;
-                  }
+                  },
                 )}
             </div>
             <Link
-              className="flex flex-row flex-nowrap items-center gap-1 hover:gap-2 transition-[gap] ease-in-out  mt-6"
+              className="mt-6 flex flex-row flex-nowrap items-center gap-1 transition-[gap] ease-in-out  hover:gap-2"
               href={`/projects/${slug}`}
             >
-              Learn More <IconArrowRight className="w-4 h-4" />
+              Learn More <IconArrowRight className="h-4 w-4" />
             </Link>
           </CardFooter>
         ) : null}
@@ -151,7 +151,7 @@ function Technology({
   const newIcon = cloneElement(icon, { className: "w-4 h-4" });
 
   return (
-    <div className="flex flex-row flex-nowrap gap-2 items-center w-max font-normal">
+    <div className="flex w-max flex-row flex-nowrap items-center gap-2 font-normal">
       {newIcon}
       {children}
     </div>

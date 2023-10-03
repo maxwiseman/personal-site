@@ -28,7 +28,7 @@ const TextContainer = styled(Text)`
 
 export const GetStartedTutorial = () => {
   const [hideTutorial, setShowTutorial] = useState(
-    window.localStorage.getItem('getstarted_closedTutorial') !== null
+    window.localStorage.getItem('getstarted_closedTutorial') !== null,
   )
 
   const {sanity} = useTheme()

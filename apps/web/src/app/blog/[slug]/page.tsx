@@ -18,9 +18,9 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = (await client.fetch(
     `*[_type == "blog-post"]`,
     {},
-    { next: { revalidate: 14400 } }
+    { next: { revalidate: 14400 } },
   )) as BlogPost[];
-  const postSlugs = posts.map(project => {
+  const postSlugs = posts.map((project) => {
     return { slug: project.slug.current };
   });
 
@@ -34,33 +34,33 @@ export default async function Page({
 }): Promise<JSX.Element> {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- It seems that ESLint doesn't really understand this
   const posts = (await client.fetch(
-    `*[_type == "blog-post" && slug.current == "${params.slug}"]`
+    `*[_type == "blog-post" && slug.current == "${params.slug}"]`,
   )) as BlogPost[];
   const post = posts[0];
   return (
     <>
       <Lenis />
-      <div className="blur-[100px] absolute w-screen h-screen -z-10">
-        <div className="bg-[#33CCFC] w-1/6 h-4/6 absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full -rotate-45" />
-        <div className="bg-[#FE43EB] w-[10%] h-3/6 absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full rotate-45" />
+      <div className="absolute -z-10 h-screen w-screen blur-[100px]">
+        <div className="absolute left-1/2 top-[50%] h-4/6 w-1/6 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-full bg-[#33CCFC]" />
+        <div className="absolute left-1/2 top-[60%] h-3/6 w-[10%] -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-full bg-[#FE43EB]" />
       </div>
       <div
-        className="w-screen min-h-screen bg-[url('/square.svg')] dark:bg-[url('/square_dark.svg')] bg-center"
+        className="min-h-screen w-screen bg-[url('/square.svg')] bg-center dark:bg-[url('/square_dark.svg')]"
         style={{
           backgroundSize: "33px",
         }}
       >
-        <div className="w-screen max-h-screen h-screen flex flex-col justify-center items-center px-10">
-          <h1 className="font-mono font-medium lg:text-8xl md:text-7xl text-6xl w-full max-w-full text-center">
+        <div className="flex h-screen max-h-screen w-screen flex-col items-center justify-center px-10">
+          <h1 className="w-full max-w-full text-center font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
             {post.name}
           </h1>
-          <h2 className="font-mono font-medium lg:text-5xl md:text-4xl text-3xl w-full max-w-full text-center">
+          <h2 className="w-full max-w-full text-center font-mono text-3xl font-medium md:text-4xl lg:text-5xl">
             Blog
           </h2>
         </div>
 
-        <div className="w-full flex justify-center">
-          <article className={cn("max-w-3xl w-full", styles.article)}>
+        <div className="flex w-full justify-center">
+          <article className={cn("w-full max-w-3xl", styles.article)}>
             <PortableText
               components={{
                 marks: {
@@ -68,7 +68,7 @@ export default async function Page({
                     props: PortableTextMarkComponentProps<{
                       _type: "link";
                       href: URL;
-                    }>
+                    }>,
                   ): JSX.Element => {
                     return (
                       <Link href={props.value?.href || ""}>{props.text}</Link>
@@ -81,7 +81,7 @@ export default async function Page({
                       code: string;
                       language: string;
                       filename: string;
-                    }>
+                    }>,
                   ): JSX.Element => {
                     return (
                       <CodeBlock
