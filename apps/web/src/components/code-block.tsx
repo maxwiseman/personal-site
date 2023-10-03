@@ -28,26 +28,19 @@ export function CodeBlock({
   content?: string;
   fileName?: string;
 }): JSX.Element {
-  // const LightTheme = lazy(() => import("../app/projects/[slug]/light"));
-  // const DarkTheme = lazy(() => import("../app/projects/[slug]/dark"));
-
   function copyCodeToClipboard(): void {
-    navigator.clipboard
-      .writeText(content || "")
-      .then(() => {
-        toast.success("Code copied to clipboard");
-      })
-      .catch((err: Error) => {
-        toast.error(err.name, {
-          description: err.message,
-          action: {
-            label: "Rety",
-            onClick: () => {
-              copyCodeToClipboard();
-            },
-          },
-        });
-      });
+    toast.promise(
+      async () => {
+        await navigator.clipboard.writeText(content || "");
+      },
+      {
+        loading: "Copying code to clipboard...",
+        success: "Code copied to clipboard",
+        error: (err: Error) => {
+          return `${err.name}: ${err.message}`;
+        },
+      },
+    );
   }
 
   return (
