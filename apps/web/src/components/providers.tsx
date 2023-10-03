@@ -1,9 +1,9 @@
 "use client";
 
 import { TooltipProvider } from "ui/components/ui/tooltip";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 import { Analytics } from "@vercel/analytics/react";
-import { Toaster } from "ui/components/ui/toaster";
+import { Toaster } from "sonner";
 
 export function Providers({
   children,
@@ -13,8 +13,19 @@ export function Providers({
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <Analytics />
-      <Toaster />
+      <ToastProvider />
       <TooltipProvider>{children}</TooltipProvider>
     </ThemeProvider>
+  );
+}
+
+function ToastProvider(): JSX.Element {
+  const { theme } = useTheme();
+  return (
+    <Toaster
+      closeButton
+      richColors
+      theme={theme as "light" | "dark" | "system"}
+    />
   );
 }

@@ -24,7 +24,7 @@ export function BlogCard({ post }: { post: BlogPost }): JSX.Element {
         <div className="w-full p-6">
           <CardTitle className="p-0 pb-0 text-xl">{post.name}</CardTitle>
           <Separator className="my-3" />
-          <CardContent className="w-max p-0 text-muted-foreground">
+          <CardContent className="text-muted-foreground w-max p-0">
             {post.description}
           </CardContent>
         </div>
