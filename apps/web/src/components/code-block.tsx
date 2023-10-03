@@ -2,8 +2,6 @@
 import { SlashIcon } from "@radix-ui/react-icons";
 import { IconClipboardCopy } from "@tabler/icons-react";
 // import "highlight.js/styles/github.css";
-import "./github_code.css";
-import "./github_code_dark.css";
 import Highlight from "react-highlight";
 import reactStringReplace from "react-string-replace";
 import { toast } from "sonner";
@@ -16,6 +14,8 @@ import {
   TooltipTrigger,
 } from "ui/components/ui/tooltip";
 import { cn } from "ui/lib/utils";
+import "./github_code.css";
+import "./github_code_dark.css";
 
 export function CodeBlock({
   children,
@@ -30,6 +30,25 @@ export function CodeBlock({
 }): JSX.Element {
   // const LightTheme = lazy(() => import("../app/projects/[slug]/light"));
   // const DarkTheme = lazy(() => import("../app/projects/[slug]/dark"));
+
+  function copyCodeToClipboard(): void {
+    navigator.clipboard
+      .writeText(content || "")
+      .then(() => {
+        toast.success("Code copied to clipboard");
+      })
+      .catch((err: Error) => {
+        toast.error(err.name, {
+          description: err.message,
+          action: {
+            label: "Rety",
+            onClick: () => {
+              copyCodeToClipboard();
+            },
+          },
+        });
+      });
+  }
 
   return (
     <Card className="my-6 overflow-hidden">
@@ -53,14 +72,7 @@ export function CodeBlock({
             <Button
               className="bg-card absolute right-6 top-0"
               onClick={() => {
-                navigator.clipboard
-                  .writeText(content || "")
-                  .then(() => {
-                    toast.success("Code copied to clipboard");
-                  })
-                  .catch(() => {
-                    toast.error("Error copying to clipboard");
-                  });
+                copyCodeToClipboard();
               }}
               size="icon"
               variant="outline"
