@@ -9,6 +9,7 @@ import { CodeBlock } from "../../../components/code-block";
 import { Lenis } from "../../../components/lenis";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
+// import type { BranchData, RepoData } from "./github-data";
 
 interface Project {
   _createdAt: Date;
@@ -19,6 +20,8 @@ interface Project {
   name: string;
   slug: { current: string; _type: "slug" };
   description: string;
+  repo: string;
+  branch: string;
   github: string;
   link: string;
   body: Block[];
@@ -72,6 +75,49 @@ export default async function Page({
     `*[_type == "project" && slug.current == "${params.slug}"]`,
   )) as Project[];
   const project = projects[0];
+
+  // const branchData = await fetch(
+  //   `https://api.github.com/repos/${project.repo}/commits/${project.branch}`,
+  // ).then((response: Response): Promise<BranchData> => response.json());
+  // const repoData = await fetch(
+  //   `https://api.github.com/repos/${project.repo}`,
+  // ).then((response: Response): Promise<RepoData> => response.json());
+
+  const portableTextProps = {
+    components: {
+      marks: {
+        link: (
+          props: PortableTextMarkComponentProps<{
+            _type: "link";
+            href: URL;
+          }>,
+        ): JSX.Element => {
+          return <Link href={props.value?.href || ""}>{props.text}</Link>;
+        },
+      },
+      types: {
+        code: (
+          props: PortableTextTypeComponentProps<{
+            code: string;
+            language: string;
+            filename: string;
+          }>,
+        ): JSX.Element => {
+          return (
+            <CodeBlock
+              content={props.value.code}
+              fileName={props.value.filename}
+              language={props.value.language}
+            >
+              {props.value.code}
+            </CodeBlock>
+          );
+        },
+      },
+    },
+    value: project.body,
+  };
+
   return (
     <>
       <Lenis />
@@ -96,42 +142,7 @@ export default async function Page({
 
         <div className="flex w-full justify-center">
           <article className={cn("w-full max-w-3xl", styles.article)}>
-            <PortableText
-              components={{
-                marks: {
-                  link: (
-                    props: PortableTextMarkComponentProps<{
-                      _type: "link";
-                      href: URL;
-                    }>,
-                  ): JSX.Element => {
-                    return (
-                      <Link href={props.value?.href || ""}>{props.text}</Link>
-                    );
-                  },
-                },
-                types: {
-                  code: (
-                    props: PortableTextTypeComponentProps<{
-                      code: string;
-                      language: string;
-                      filename: string;
-                    }>,
-                  ): JSX.Element => {
-                    return (
-                      <CodeBlock
-                        content={props.value.code}
-                        fileName={props.value.filename}
-                        language={props.value.language}
-                      >
-                        {props.value.code}
-                      </CodeBlock>
-                    );
-                  },
-                },
-              }}
-              value={project.body}
-            />
+            <PortableText {...portableTextProps} />
           </article>
         </div>
       </div>

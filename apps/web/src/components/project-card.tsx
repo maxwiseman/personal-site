@@ -26,54 +26,52 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "ui/components/ui/tooltip";
+// import type { BranchData, RepoData } from "../app/projects/[slug]/github-data";
+import type { RepoData } from "../app/projects/[slug]/github-data";
+import type { Project } from "./project";
 
-export function ProjectCard({
-  title,
-  links,
-  technology,
-  slug,
-  children,
+export async function ProjectCard({
+  project,
 }: {
-  title?: string;
-  slug?: string;
-  technology?: {
-    vercel?: boolean;
-    react?: boolean;
-    next?: boolean;
-    drizzle?: boolean;
-    planetscale?: boolean;
-    neon?: boolean;
-    cloudflare?: boolean;
-    ai?: boolean;
-    tailwind?: boolean;
-  };
-  links?: {
-    type: "github" | "link";
-    content?: string;
-  }[];
+  project: Project;
   children?: React.ReactNode;
-}): JSX.Element {
+}): Promise<JSX.Element> {
+  // const branchData = await fetch(
+  //   `https://api.github.com/repos/${project.repo}/commits/${project.branch}`,
+  // ).then((response: Response): Promise<BranchData> => response.json());
+  const repoData = await fetch(
+    `https://api.github.com/repos/${project.repo}`,
+  ).then((response: Response): Promise<RepoData> => response.json());
+
+  const links = [
+    {
+      type: "github",
+      content: `https://github.com/${project.repo}`,
+      icon: <GitHubLogoIcon className="h-4 w-4" />,
+    },
+    {
+      type: "link",
+      content: repoData.homepage,
+      icon: <Link2Icon className="h-4 w-4" />,
+    },
+  ];
+
   return (
     <Card className="relative h-max min-h-max w-full min-w-[250px] p-6">
       <CardContent className="p-0 pt-0">
-        {title ? (
+        {project.name ? (
           <>
             <CardTitle className="flex flex-row flex-wrap items-center justify-between gap-2 pb-1 text-xl">
-              <span className="w-max">{title}</span>
+              <span className="w-max">{project.name}</span>
               <div className="flex w-max flex-row flex-nowrap gap-2">
-                {links?.map((link) => {
+                {links.map((link) => {
                   if (link.content === undefined) return null;
                   return (
                     <Tooltip key={link.type}>
                       <TooltipTrigger asChild>
                         <Link href={link.content} target="blank">
                           <Button size="icon" variant="outline">
-                            {link.type === "github" && (
-                              <GitHubLogoIcon className="h-4 w-4" />
-                            )}
-                            {link.type === "link" && (
-                              <Link2Icon className="h-4 w-4" />
-                            )}
+                            {link.icon}
                           </Button>
                         </Link>
                       </TooltipTrigger>
@@ -89,12 +87,13 @@ export function ProjectCard({
             <Separator className="my-3" />
           </>
         ) : null}
-        {children}
-        {technology ? (
+        {/* {children} */}
+        {project.description}
+        {project.stack ? (
           <CardFooter className="relative bottom-0 mt-6 min-h-max flex-col items-start justify-normal p-0 font-medium">
             Tech Stack:
             <div className="mt-2 flex w-full flex-col flex-wrap gap-1">
-              {Object.keys(technology)
+              {Object.keys(project.stack)
                 .sort()
                 .map(
                   (
@@ -109,7 +108,7 @@ export function ProjectCard({
                       | "ai"
                       | "tailwind",
                   ) => {
-                    if (technology[item] === true) {
+                    if (project.stack && project.stack[item]) {
                       return (
                         <Technology
                           icon={dict[item].icon}
@@ -125,7 +124,7 @@ export function ProjectCard({
             </div>
             <Link
               className="mt-6 flex flex-row flex-nowrap items-center gap-1 transition-[gap] ease-in-out  hover:gap-2"
-              href={`/projects/${slug}`}
+              href={`/projects/${project.slug.current}`}
             >
               Learn More <IconArrowRight className="h-4 w-4" />
             </Link>

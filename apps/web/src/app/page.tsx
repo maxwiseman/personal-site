@@ -1,46 +1,9 @@
 import type { BlogPost } from "../components/blog";
 import { BlogCard } from "../components/blog-card";
 import { Lenis } from "../components/lenis";
+import type { Project } from "../components/project";
 import { ProjectCard } from "../components/project-card";
 import client from "../lib/client";
-
-export interface Project {
-  _createdAt: Date;
-  _updatedAt: Date;
-  _id: string;
-  _rev: string;
-  _type: "project";
-  name: string;
-  slug: { current: string; _type: "slug" };
-  description: string;
-  github: string;
-  link: string;
-  body: Block[];
-  stack: {
-    vercel: boolean;
-    react: boolean;
-    next: boolean;
-    drizzle: boolean;
-    planetscale: boolean;
-    neon: boolean;
-    cloudflare: boolean;
-    ai: boolean;
-    tailwind: boolean;
-  };
-}
-
-interface Block {
-  _type: "block";
-  children: {
-    _type: string;
-    marks?: [];
-    text?: string;
-    _key?: string;
-    markDefs?: [];
-  }[];
-  markDefs: [];
-  style: "normal";
-}
 
 export function generateStaticParams(): [] {
   return [];
@@ -88,19 +51,8 @@ export default async function Page(): Promise<JSX.Element> {
           <div className="grid h-max grid-flow-row gap-5 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => {
               return (
-                <ProjectCard
-                  key={project.slug.current}
-                  links={[
-                    {
-                      type: "github",
-                      content: project.github,
-                    },
-                    { type: "link", content: project.link },
-                  ]}
-                  slug={project.slug.current}
-                  technology={project.stack}
-                  title={project.name}
-                >
+                // @ts-expect-error Server Component
+                <ProjectCard key={project._id} project={project}>
                   {project.description}
                 </ProjectCard>
               );

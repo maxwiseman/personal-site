@@ -1,7 +1,6 @@
 "use client";
 import { SlashIcon } from "@radix-ui/react-icons";
 import { IconClipboardCopy } from "@tabler/icons-react";
-// import "highlight.js/styles/github.css";
 import Highlight from "react-highlight";
 import reactStringReplace from "react-string-replace";
 import { toast } from "sonner";

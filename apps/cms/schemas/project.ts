@@ -26,8 +26,19 @@ export default {
       rows: 3,
       validation: (Rule: any) => Rule.required().min(10).max(200),
     },
-    {name: 'github', title: 'Github', type: 'url'},
-    {name: 'link', title: 'Link', type: 'url'},
+    {
+      name: 'repo',
+      type: 'string',
+      title: 'Repo',
+      validation: (Rule: any) => Rule.required().min(10).max(200),
+    },
+    {
+      name: 'branch',
+      type: 'string',
+      title: 'Main Branch',
+      initialValue: 'main',
+      validation: (Rule: any) => Rule.required().min(1).max(200),
+    },
     {
       name: 'body',
       type: 'array',
