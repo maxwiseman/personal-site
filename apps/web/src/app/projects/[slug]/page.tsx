@@ -3,51 +3,17 @@ import type {
   PortableTextTypeComponentProps,
 } from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
+import imageUrlBuilder from "@sanity/image-url";
 import Link from "next/link";
+import { Card, CardContent } from "ui/components/ui/card";
 import { cn } from "ui/lib/utils";
 import { CodeBlock } from "../../../components/code-block";
+import { HeroImage } from "../../../components/hero-image";
 import { Lenis } from "../../../components/lenis";
+import { Technology, dict, type Project } from "../../../components/project";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
 // import type { BranchData, RepoData } from "./github-data";
-
-interface Project {
-  _createdAt: Date;
-  _updatedAt: Date;
-  _id: string;
-  _rev: string;
-  _type: "project";
-  name: string;
-  slug: { current: string; _type: "slug" };
-  description: string;
-  repo: string;
-  branch: string;
-  github: string;
-  link: string;
-  body: Block[];
-  vercel: boolean;
-  react: boolean;
-  next: boolean;
-  drizzle: boolean;
-  planetscale: boolean;
-  neon: boolean;
-  cloudflare: boolean;
-  ai: boolean;
-  tailwind: boolean;
-}
-
-interface Block {
-  _type: "block";
-  children: {
-    _type: string;
-    marks?: [];
-    text?: string;
-    _key?: string;
-    markDefs?: [];
-  }[];
-  markDefs: [];
-  style: "normal";
-}
 
 export const revalidate = 14400;
 
@@ -118,6 +84,8 @@ export default async function Page({
     value: project.body,
   };
 
+  const builder = imageUrlBuilder(client);
+
   return (
     <>
       <Lenis />
@@ -131,7 +99,7 @@ export default async function Page({
           backgroundSize: "33px",
         }}
       >
-        <div className="flex h-screen max-h-screen w-screen flex-col items-center justify-center px-10">
+        <div className="flex h-[75vh] max-h-screen w-screen flex-col items-center justify-center px-10">
           <h1 className="w-full max-w-full text-center font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
             {project.name}
           </h1>
@@ -140,7 +108,54 @@ export default async function Page({
           </h2>
         </div>
 
-        <div className="flex w-full justify-center">
+        {project.image ? (
+          <HeroImage
+            dark={builder.image(project.image.dark).auto("format").url()}
+            light={builder.image(project.image.light).auto("format").url()}
+          />
+        ) : null}
+
+        <div className="w-full flex justify-center items-center">
+          <Card className="mt-12 w-full max-w-6xl mx-6 sm:mx-8 md:mx-12 lg:mx-24">
+            <CardContent className="p-6">
+              <div className="relative bottom-0 min-h-max flex-col items-start justify-normal p-0 font-medium">
+                Tech Stack:
+                <div className="mt-2 flex w-full flex-col flex-wrap gap-1">
+                  {Object.keys(project.stack || {})
+                    .sort()
+                    .map(
+                      (
+                        item:
+                          | "vercel"
+                          | "react"
+                          | "next"
+                          | "drizzle"
+                          | "planetscale"
+                          | "neon"
+                          | "cloudflare"
+                          | "ai"
+                          | "tailwind",
+                      ) => {
+                        if (project.stack && project.stack[item]) {
+                          return (
+                            <Technology
+                              icon={dict[item].icon}
+                              key={dict[item].name}
+                            >
+                              {dict[item].name}
+                            </Technology>
+                          );
+                        }
+                        return null;
+                      },
+                    )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="flex w-full justify-center mt-16 px-6 sm:px-8 md:px-12 lg:px-24">
           <article className={cn("w-full max-w-3xl", styles.article)}>
             <PortableText {...portableTextProps} />
           </article>

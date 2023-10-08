@@ -37,6 +37,42 @@ export default async function Page({
     `*[_type == "blog-post" && slug.current == "${params.slug}"]`,
   )) as BlogPost[];
   const post = posts[0];
+
+  const portableTextProps = {
+    components: {
+      marks: {
+        link: (
+          props: PortableTextMarkComponentProps<{
+            _type: "link";
+            href: URL;
+          }>,
+        ): JSX.Element => {
+          return <Link href={props.value?.href || ""}>{props.text}</Link>;
+        },
+      },
+      types: {
+        code: (
+          props: PortableTextTypeComponentProps<{
+            code: string;
+            language: string;
+            filename: string;
+          }>,
+        ): JSX.Element => {
+          return (
+            <CodeBlock
+              content={props.value.code}
+              fileName={props.value.filename}
+              language={props.value.language}
+            >
+              {props.value.code}
+            </CodeBlock>
+          );
+        },
+      },
+    },
+    value: post.body,
+  };
+
   return (
     <>
       <Lenis />
@@ -61,42 +97,7 @@ export default async function Page({
 
         <div className="flex w-full justify-center">
           <article className={cn("w-full max-w-3xl", styles.article)}>
-            <PortableText
-              components={{
-                marks: {
-                  link: (
-                    props: PortableTextMarkComponentProps<{
-                      _type: "link";
-                      href: URL;
-                    }>,
-                  ): JSX.Element => {
-                    return (
-                      <Link href={props.value?.href || ""}>{props.text}</Link>
-                    );
-                  },
-                },
-                types: {
-                  code: (
-                    props: PortableTextTypeComponentProps<{
-                      code: string;
-                      language: string;
-                      filename: string;
-                    }>,
-                  ): JSX.Element => {
-                    return (
-                      <CodeBlock
-                        content={props.value.code}
-                        fileName={props.value.filename}
-                        language={props.value.language}
-                      >
-                        {props.value.code}
-                      </CodeBlock>
-                    );
-                  },
-                },
-              }}
-              value={post.body}
-            />
+            <PortableText {...portableTextProps} />
           </article>
         </div>
       </div>

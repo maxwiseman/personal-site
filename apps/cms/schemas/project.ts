@@ -27,6 +27,23 @@ export default {
       validation: (Rule: any) => Rule.required().min(10).max(200),
     },
     {
+      name: 'image',
+      type: 'object',
+      title: 'Images',
+      fields: [
+        {
+          name: 'light',
+          type: 'image',
+          title: 'Light Image',
+        },
+        {
+          name: 'dark',
+          type: 'image',
+          title: 'Dark Image',
+        },
+      ],
+    },
+    {
       name: 'repo',
       type: 'string',
       title: 'Repo',
