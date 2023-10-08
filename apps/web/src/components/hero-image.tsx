@@ -17,15 +17,13 @@ export function HeroImage({
 
   const [prefersDarkTheme, setPrefersDarkTheme] = useState<boolean>(false);
 
-  const darkModeQuery = window.matchMedia("prefers-color-scheme: dark");
-
   useEffect(() => {
     if (document.querySelector(".dark")) {
       setPrefersDarkTheme(true);
     } else {
       setPrefersDarkTheme(false);
     }
-  }, [darkModeQuery]);
+  }, []);
 
   if ((theme === "system" && prefersDarkTheme) || theme === "dark") {
     src = dark;
