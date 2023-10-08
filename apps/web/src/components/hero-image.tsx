@@ -34,12 +34,12 @@ export function HeroImage({
   }
 
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="flex w-full items-center justify-center">
       <div className="mx-6 sm:mx-8 md:mx-12 lg:mx-24">
-        <div className="-m-2 max-w-6xl backdrop-blur-sm rounded-xl bg-gray-900/5 dark:bg-white/5 p-2 ring-1 ring-inset ring-gray-900/10 dark:ring-white/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+        <div className="-m-2 max-w-6xl rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:ring-white/10 lg:-m-4 lg:rounded-2xl lg:p-4">
           <Image
             alt="Preview"
-            className="rounded-md max-h-[75vh] object-cover bg-white p-0 shadow-2xl ring-1 ring-gray-900/10 dark:ring-gray-400/10"
+            className="max-h-[75vh] rounded-md bg-white object-cover p-0 shadow-2xl ring-1 ring-gray-900/10 dark:ring-gray-400/10"
             height={866}
             src={src}
             width={1364}

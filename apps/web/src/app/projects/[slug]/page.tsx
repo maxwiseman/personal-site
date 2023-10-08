@@ -5,14 +5,14 @@ import type {
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import Link from "next/link";
-import { Card, CardContent } from "ui/components/ui/card";
 import { cn } from "ui/lib/utils";
 import { CodeBlock } from "../../../components/code-block";
 import { HeroImage } from "../../../components/hero-image";
 import { Lenis } from "../../../components/lenis";
-import { Technology, dict, type Project } from "../../../components/project";
+import { dict, type Project } from "../../../components/project";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
+import { ProjectBadge } from "./project-badge";
 // import type { BranchData, RepoData } from "./github-data";
 
 export const revalidate = 14400;
@@ -99,13 +99,39 @@ export default async function Page({
           backgroundSize: "33px",
         }}
       >
-        <div className="flex h-[75vh] max-h-screen w-screen flex-col items-center justify-center px-10">
-          <h1 className="w-full max-w-full text-center font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
-            {project.name}
-          </h1>
-          <h2 className="w-full max-w-full text-center font-mono text-3xl font-medium md:text-4xl lg:text-5xl">
-            Projects
-          </h2>
+        <div className="flex h-[75vh] max-h-[32rem] w-screen flex-col items-center justify-center px-10">
+          <div className="max-w-min overflow-scroll">
+            <h1 className="min-w-max max-w-full text-center font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
+              {project.name}
+            </h1>
+            <div className="mt-5 flex max-w-full flex-row flex-wrap justify-center gap-2">
+              {Object.keys(project.stack || {})
+                .sort()
+                .map(
+                  (
+                    item:
+                      | "vercel"
+                      | "react"
+                      | "next"
+                      | "drizzle"
+                      | "planetscale"
+                      | "neon"
+                      | "cloudflare"
+                      | "ai"
+                      | "tailwind",
+                  ) => {
+                    if (project.stack && project.stack[item]) {
+                      return (
+                        <ProjectBadge icon={dict[item].icon} key={project._id}>
+                          {dict[item].name}
+                        </ProjectBadge>
+                      );
+                    }
+                    return null;
+                  },
+                )}
+            </div>
+          </div>
         </div>
 
         {project.image ? (
@@ -115,7 +141,7 @@ export default async function Page({
           />
         ) : null}
 
-        <div className="w-full flex justify-center items-center">
+        {/* <div className="w-full flex justify-center items-center">
           <Card className="mt-12 w-full max-w-6xl mx-6 sm:mx-8 md:mx-12 lg:mx-24">
             <CardContent className="p-6">
               <div className="relative bottom-0 min-h-max flex-col items-start justify-normal p-0 font-medium">
@@ -153,9 +179,9 @@ export default async function Page({
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
-        <div className="flex w-full justify-center mt-16 px-6 sm:px-8 md:px-12 lg:px-24">
+        <div className="mt-16 flex w-full justify-center px-6 sm:px-8 md:px-12 lg:px-24">
           <article className={cn("w-full max-w-3xl", styles.article)}>
             <PortableText {...portableTextProps} />
           </article>
