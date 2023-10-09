@@ -1,3 +1,5 @@
+"use client";
+
 import moment from "moment";
 import { Avatar, AvatarFallback, AvatarImage } from "ui/components/ui/avatar";
 import type { BranchData } from "./github-data";
