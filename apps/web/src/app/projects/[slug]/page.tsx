@@ -12,8 +12,7 @@ import { Lenis } from "../../../components/lenis";
 import { dict, type Project } from "../../../components/project";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
-import { Commit } from "./commit";
-import type { BranchData, RepoData } from "./github-data";
+import { CommitBlock } from "./commit";
 import { ProjectBadge } from "./project-badge";
 // import type { BranchData, RepoData } from "./github-data";
 
@@ -43,13 +42,6 @@ export default async function Page({
     `*[_type == "project" && slug.current == "${params.slug}"]`,
   )) as Project[];
   const project = projects[0];
-
-  const branchData = await fetch(
-    `https://api.github.com/repos/${project.repo}/commits`,
-  ).then((response: Response): Promise<BranchData[]> => response.json());
-  const repoData = await fetch(
-    `https://api.github.com/repos/${project.repo}`,
-  ).then((response: Response): Promise<RepoData> => response.json());
 
   const portableTextProps = {
     components: {
@@ -144,12 +136,13 @@ export default async function Page({
         ) : null}
 
         <div className="flex w-full justify-center">
-          <Link
+          {/* <Link
             className="mx-6 mt-10 w-full max-w-6xl space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24"
             href={repoData.html_url}
           >
             <Commit branchData={branchData[0]} />
-          </Link>
+          </Link> */}
+          <CommitBlock project={project} />
         </div>
 
         <div className="mt-16 flex w-full justify-center px-6 sm:px-8 md:px-12 lg:px-24">
