@@ -3,6 +3,7 @@
 import { IconLoader } from "@tabler/icons-react";
 import moment from "moment";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "ui/components/ui/avatar";
 import type { Project } from "../../../components/project";
@@ -50,6 +51,18 @@ export function Commit({
 }: {
   branchData: BranchData;
 }): JSX.Element {
+  function calculateTime(): string {
+    return moment(branchData.commit.author.date).fromNow();
+  }
+
+  useEffect(() => {
+    setInterval(() => {
+      setTime(calculateTime());
+    }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- This doesn't need to be a dependency
+  }, []);
+
+  const [time, setTime] = useState<string>("");
   return (
     <div className="flex w-full flex-row flex-nowrap items-center justify-between gap-2">
       <div className="flex flex-row flex-nowrap items-center gap-2">
@@ -67,9 +80,7 @@ export function Commit({
           {branchData.commit.message}
         </span>
       </div>
-      <span className="text-muted-foreground">
-        {moment(branchData.commit.author.date).fromNow()}
-      </span>
+      <span className="text-muted-foreground">{time}</span>
     </div>
   );
 }
