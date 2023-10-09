@@ -12,6 +12,8 @@ import { Lenis } from "../../../components/lenis";
 import { dict, type Project } from "../../../components/project";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
+import { Commit } from "./commit";
+import type { BranchData, RepoData } from "./github-data";
 import { ProjectBadge } from "./project-badge";
 // import type { BranchData, RepoData } from "./github-data";
 
@@ -42,12 +44,12 @@ export default async function Page({
   )) as Project[];
   const project = projects[0];
 
-  // const branchData = await fetch(
-  //   `https://api.github.com/repos/${project.repo}/commits/${project.branch}`,
-  // ).then((response: Response): Promise<BranchData> => response.json());
-  // const repoData = await fetch(
-  //   `https://api.github.com/repos/${project.repo}`,
-  // ).then((response: Response): Promise<RepoData> => response.json());
+  const branchData = await fetch(
+    `https://api.github.com/repos/${project.repo}/commits`,
+  ).then((response: Response): Promise<BranchData[]> => response.json());
+  const repoData = await fetch(
+    `https://api.github.com/repos/${project.repo}`,
+  ).then((response: Response): Promise<RepoData> => response.json());
 
   const portableTextProps = {
     components: {
@@ -100,11 +102,11 @@ export default async function Page({
         }}
       >
         <div className="flex h-[75vh] max-h-[32rem] w-screen flex-col items-center justify-center px-10">
-          <div className="max-w-min overflow-scroll">
-            <h1 className="min-w-max max-w-full text-center font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
+          <div className="relative">
+            <h1 className="max-w-screen w-full text-center font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
               {project.name}
             </h1>
-            <div className="mt-5 flex max-w-full flex-row flex-wrap justify-center gap-2">
+            <div className="absolute left-0 right-0 top-full mt-5 flex w-full flex-row flex-wrap justify-center gap-2">
               {Object.keys(project.stack || {})
                 .sort()
                 .map(
@@ -141,45 +143,14 @@ export default async function Page({
           />
         ) : null}
 
-        {/* <div className="w-full flex justify-center items-center">
-          <Card className="mt-12 w-full max-w-6xl mx-6 sm:mx-8 md:mx-12 lg:mx-24">
-            <CardContent className="p-6">
-              <div className="relative bottom-0 min-h-max flex-col items-start justify-normal p-0 font-medium">
-                Tech Stack:
-                <div className="mt-2 flex w-full flex-col flex-wrap gap-1">
-                  {Object.keys(project.stack || {})
-                    .sort()
-                    .map(
-                      (
-                        item:
-                          | "vercel"
-                          | "react"
-                          | "next"
-                          | "drizzle"
-                          | "planetscale"
-                          | "neon"
-                          | "cloudflare"
-                          | "ai"
-                          | "tailwind",
-                      ) => {
-                        if (project.stack && project.stack[item]) {
-                          return (
-                            <Technology
-                              icon={dict[item].icon}
-                              key={dict[item].name}
-                            >
-                              {dict[item].name}
-                            </Technology>
-                          );
-                        }
-                        return null;
-                      },
-                    )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div> */}
+        <div className="flex w-full justify-center">
+          <Link
+            className="mx-6 mt-10 w-full max-w-6xl space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24"
+            href={repoData.html_url}
+          >
+            <Commit branchData={branchData[0]} />
+          </Link>
+        </div>
 
         <div className="mt-16 flex w-full justify-center px-6 sm:px-8 md:px-12 lg:px-24">
           <article className={cn("w-full max-w-3xl", styles.article)}>
