@@ -3,7 +3,7 @@
 import { IconLoader } from "@tabler/icons-react";
 import moment from "moment";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "ui/components/ui/avatar";
 import type { Project } from "../../../components/project";
@@ -60,15 +60,17 @@ export function Commit({
   function calculateTime(): string {
     return moment(branchData.commit.author.date).fromNow();
   }
-
+  const timeIntervalRef = useRef<NodeJS.Timeout>();
   useEffect(() => {
-    setInterval(() => {
+    timeIntervalRef.current = setInterval(() => {
       setTime(calculateTime());
     }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- This doesn't need to be a dependency
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- this is fine
+    return () => clearInterval(timeIntervalRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- this is also fine
   }, [branchData.commit.author.date]);
 
-  const [time, setTime] = useState<string>(calculateTime());
+  const [time, setTime] = useState<string>(() => calculateTime());
   return (
     <div className="flex w-full flex-row flex-nowrap items-center justify-between gap-2">
       <div className="flex flex-row flex-nowrap items-center gap-2">
