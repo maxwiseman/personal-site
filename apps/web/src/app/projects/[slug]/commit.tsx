@@ -66,7 +66,7 @@ export function Commit({
       setTime(calculateTime());
     }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- This doesn't need to be a dependency
-  }, []);
+  }, [branchData.commit.author.date]);
 
   const [time, setTime] = useState<string>(calculateTime());
   return (
