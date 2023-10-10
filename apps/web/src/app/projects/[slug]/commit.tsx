@@ -40,6 +40,7 @@ export function CommitBlock({ project }: { project: Project }): JSX.Element {
       <Link
         className="mx-6 mt-10 w-full max-w-6xl space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24"
         href={repoData?.html_url || ""}
+        target="_blank"
       >
         {branchData ? <Commit branchData={branchData[0]} /> : null}
       </Link>
