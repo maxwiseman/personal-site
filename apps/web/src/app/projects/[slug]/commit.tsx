@@ -18,6 +18,9 @@ export function CommitBlock({ project }: { project: Project }): JSX.Element {
       ).then((response: Response): Promise<RepoData> => response.json());
       return data;
     },
+    {
+      refetchInterval: 60000,
+    },
   );
   const { data: branchData, isFetched: branchFetched } = useQuery(
     "branch",
@@ -26,6 +29,9 @@ export function CommitBlock({ project }: { project: Project }): JSX.Element {
         `https://api.github.com/repos/${project.repo}/commits`,
       ).then((response: Response): Promise<BranchData[]> => response.json());
       return data;
+    },
+    {
+      refetchInterval: 60000,
     },
   );
 
@@ -62,7 +68,7 @@ export function Commit({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- This doesn't need to be a dependency
   }, []);
 
-  const [time, setTime] = useState<string>("");
+  const [time, setTime] = useState<string>(calculateTime());
   return (
     <div className="flex w-full flex-row flex-nowrap items-center justify-between gap-2">
       <div className="flex flex-row flex-nowrap items-center gap-2">
