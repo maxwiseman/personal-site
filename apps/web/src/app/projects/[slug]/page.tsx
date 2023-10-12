@@ -146,7 +146,7 @@ export default async function Page({
         </div>
 
         <div className="mt-16 flex w-full justify-center px-6 sm:px-8 md:px-12 lg:px-24">
-          <article className={cn("w-full max-w-3xl", styles.article)}>
+          <article className={cn("w-full max-w-3xl mb-24", styles.article)}>
             <PortableText {...portableTextProps} />
           </article>
         </div>
