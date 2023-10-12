@@ -36,7 +36,7 @@ export default async function Page(): Promise<JSX.Element> {
           backgroundSize: "33px",
         }}
       >
-        <div className="z-50 flex h-screen max-h-screen w-screen flex-col items-center justify-center px-10 md:w-1/2">
+        {/* <div className="z-50 flex h-screen max-h-screen w-screen flex-col items-center justify-center px-10 md:w-1/2">
           <div>
             <h1 className="w-min max-w-full font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
               Max Wiseman
@@ -45,10 +45,22 @@ export default async function Page(): Promise<JSX.Element> {
               Knoxville, TN
             </address>
           </div>
+        </div> */}
+        <div className="w-full flex justify-center items-center h-screen">
+          <div className="md:max-w-7xl md:w-full max-w-[50vw] mx-24">
+            <div>
+              <h1 className="w-min max-w-full font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
+                Max Wiseman
+              </h1>
+              <address className="w-max font-mono text-3xl not-italic">
+                Knoxville, TN
+              </address>
+            </div>
+          </div>
         </div>
         <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
           <h2 className="font-mono text-5xl font-medium">Projects</h2>
-          <div className="grid h-max grid-flow-row gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid h-max grid-flow-row gap-5 md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
             {projects.map((project) => {
               return (
                 // @ts-expect-error Server Component
@@ -61,7 +73,7 @@ export default async function Page(): Promise<JSX.Element> {
         </div>
         <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
           <h2 className="font-mono text-5xl font-medium">Blog</h2>
-          <div className="h-max w-full gap-5">
+          <div className="h-max w-full gap-5 max-w-7xl">
             {blogPosts.map((post) => {
               return <BlogCard key={post._id} post={post} />;
             })}
