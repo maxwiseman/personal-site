@@ -78,7 +78,11 @@ export function Commit({
         <Avatar className="h-7 w-7 ring-1 ring-gray-900/10 dark:ring-white/10">
           <AvatarImage
             alt={branchData.commit.committer.name}
-            src={branchData.committer.avatar_url as unknown as string}
+            src={
+              branchData.commit.author.name === "dependabot[bot]"
+                ? "https://avatars.githubusercontent.com/in/29110"
+                : (branchData.committer.avatar_url as unknown as string)
+            }
           />
           <AvatarFallback>
             <IconLoader className="h-4 w-4 animate-spin text-gray-400" />
