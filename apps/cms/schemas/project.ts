@@ -24,7 +24,7 @@ export default {
       type: 'text',
       title: 'Description',
       rows: 3,
-      validation: (Rule: any) => Rule.required().min(10).max(200),
+      validation: (Rule: any) => Rule.required().min(10),
     },
     {
       name: 'image',
