@@ -68,13 +68,13 @@ export async function ProjectCard({
                   if (link.content === undefined) return null;
                   return (
                     <Tooltip key={link.type}>
-                      <TooltipTrigger asChild>
-                        <Link href={link.content} target="blank">
+                      <Link href={link.content} tabIndex={-1} target="blank">
+                        <TooltipTrigger asChild>
                           <Button size="icon" variant="outline">
                             {link.icon}
                           </Button>
-                        </Link>
-                      </TooltipTrigger>
+                        </TooltipTrigger>
+                      </Link>
                       <TooltipContent>
                         {link.type === "github" && "View on GitHub"}
                         {link.type === "link" && "View deployment"}

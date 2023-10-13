@@ -46,8 +46,8 @@ export default async function Page(): Promise<JSX.Element> {
             </address>
           </div>
         </div> */}
-        <div className="w-full flex justify-center items-center h-screen">
-          <div className="md:max-w-7xl md:w-full max-w-[50vw] mx-24">
+        <div className="flex h-screen w-full items-center justify-center">
+          <div className="mx-24 max-w-[50vw] md:w-full md:max-w-7xl">
             <div>
               <h1 className="w-min max-w-full font-mono text-6xl font-medium md:text-7xl lg:text-8xl">
                 Max Wiseman
@@ -60,7 +60,7 @@ export default async function Page(): Promise<JSX.Element> {
         </div>
         <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
           <h2 className="font-mono text-5xl font-medium">Projects</h2>
-          <div className="grid h-max grid-flow-row gap-5 md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+          <div className="grid h-max max-w-7xl grid-flow-row gap-5 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => {
               return (
                 // @ts-expect-error Server Component
@@ -73,7 +73,7 @@ export default async function Page(): Promise<JSX.Element> {
         </div>
         <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
           <h2 className="font-mono text-5xl font-medium">Blog</h2>
-          <div className="h-max w-full gap-5 max-w-7xl">
+          <div className="h-max w-full max-w-7xl gap-5">
             {blogPosts.map((post) => {
               return <BlogCard key={post._id} post={post} />;
             })}
