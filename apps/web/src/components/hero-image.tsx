@@ -26,17 +26,13 @@ export function HeroImage({
 
   const [prefersDarkTheme, setPrefersDarkTheme] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState<boolean>(false);
-  const [frameWidth, setFrameWidth] = useState<number>(
-    Math.min(1120, window.innerWidth - 224),
-  );
-  const [frameHeight, setFrameHeight] = useState<number>(
-    window.innerHeight * 0.75,
-  );
+  const [frameWidth, setFrameWidth] = useState<number>(getWidth());
+  const [frameHeight, setFrameHeight] = useState<number>(getHeight());
 
   useEffect(() => {
     addEventListener("resize", () => {
-      setFrameWidth(Math.min(1120, window.innerWidth - 224));
-      setFrameHeight(window.innerHeight * 0.75);
+      setFrameWidth(getWidth());
+      setFrameHeight(getHeight());
     });
   }, []);
 
@@ -47,6 +43,16 @@ export function HeroImage({
       setPrefersDarkTheme(false);
     }
   }, []);
+
+  function getWidth(): number {
+    if (typeof window !== "undefined")
+      return Math.min(1120, window.innerWidth - 224);
+    return 0;
+  }
+  function getHeight(): number {
+    if (typeof window !== "undefined") return window.innerHeight * 0.75;
+    return 0;
+  }
 
   if ((theme === "system" && prefersDarkTheme) || theme === "dark") {
     src = dark;
