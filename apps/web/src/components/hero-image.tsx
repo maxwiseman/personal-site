@@ -134,11 +134,12 @@ export function HeroImage({
                     onClick={() => {
                       setShowPreview(true);
                     }}
+                    variant="secondary"
                   >
                     <IconPlayerPlay className="h-4 w-4" /> Live Preview
                   </Button>
                   <Link href={href} tabIndex={-1}>
-                    <Button className="flex flex-row gap-2">
+                    <Button className="flex flex-row gap-2" variant="secondary">
                       <IconExternalLink className="h-4 w-4" /> Open in New Tab
                     </Button>
                   </Link>
