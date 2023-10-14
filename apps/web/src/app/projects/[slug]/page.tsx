@@ -13,6 +13,7 @@ import { dict, type Project } from "../../../components/project";
 import client from "../../../lib/client";
 import styles from "./article.module.css";
 import { CommitBlock } from "./commit";
+import type { RepoData } from "./github-data";
 import { ProjectBadge } from "./project-badge";
 // import type { BranchData, RepoData } from "./github-data";
 
@@ -80,6 +81,10 @@ export default async function Page({
 
   const builder = imageUrlBuilder(client);
 
+  const repoData = await fetch(
+    `https://api.github.com/repos/${project.repo}`,
+  ).then((response: Response): Promise<RepoData> => response.json());
+
   return (
     <>
       <Lenis />
@@ -131,6 +136,7 @@ export default async function Page({
         {project.image ? (
           <HeroImage
             dark={builder.image(project.image.dark).auto("format").url()}
+            href={repoData.homepage}
             light={builder.image(project.image.light).auto("format").url()}
           />
         ) : null}

@@ -38,7 +38,7 @@ export function CommitBlock({ project }: { project: Project }): JSX.Element {
   if (repoFetched && branchFetched) {
     return (
       <Link
-        className="mx-6 mt-10 w-full max-w-6xl space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24"
+        className="mx-6 mt-5 w-full max-w-6xl space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24"
         href={repoData?.html_url || ""}
         target="_blank"
       >
@@ -47,7 +47,7 @@ export function CommitBlock({ project }: { project: Project }): JSX.Element {
     );
   }
   return (
-    <div className="mx-6 mt-10 flex w-full max-w-6xl flex-row flex-nowrap items-center gap-2 space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24">
+    <div className="mx-6 mt-5 flex w-full max-w-6xl flex-row flex-nowrap items-center gap-2 space-y-5 rounded-xl bg-gray-900/5 p-5 ring-1 ring-inset ring-gray-900/10 backdrop-blur-sm dark:bg-white/5 dark:text-white dark:ring-white/10 sm:mx-8 md:mx-12 lg:mx-24">
       <IconLoader className="m-1 h-5 w-5 animate-spin" /> Loading...
     </div>
   );
@@ -74,7 +74,7 @@ export function Commit({
   const [time, setTime] = useState<string>(() => calculateTime());
   return (
     <div className="flex w-full flex-row flex-nowrap items-center justify-between gap-2">
-      <div className="flex flex-row flex-nowrap items-center gap-2">
+      <div className="flex flex-row flex-nowrap items-center gap-3">
         <Avatar className="h-7 w-7 ring-1 ring-gray-900/10 dark:ring-white/10">
           <AvatarImage
             alt={branchData.commit.committer.name}
@@ -88,12 +88,12 @@ export function Commit({
             <IconLoader className="h-4 w-4 animate-spin text-gray-400" />
           </AvatarFallback>
         </Avatar>
-        <span className="mr-1">{branchData.commit.author.name}:</span>
-        <span className="text-muted-foreground">
+        <span className="font-medium">{branchData.commit.author.name}:</span>
+        <span className="text-muted-foreground line-clamp-1">
           {branchData.commit.message}
         </span>
       </div>
-      <span className="text-muted-foreground">{time}</span>
+      <span className="text-muted-foreground min-w-max">{time}</span>
     </div>
   );
 }
