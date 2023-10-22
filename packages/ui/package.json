@@ -29,7 +29,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
-    "lucide-react": "^0.244.0",
+    "lucide-react": "^0.279.0",
     "tailwind-config": "workspace:*",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6"
