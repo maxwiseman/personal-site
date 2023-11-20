@@ -71,14 +71,17 @@ export default async function Page(): Promise<JSX.Element> {
             })}
           </div>
         </div>
-        <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
-          <h2 className="font-mono text-5xl font-medium">Blog</h2>
-          <div className="h-max w-full max-w-7xl gap-5">
-            {blogPosts.map((post) => {
-              return <BlogCard key={post._id} post={post} />;
-            })}
+        {/* eslint-disable-next-line turbo/no-undeclared-env-vars -- This variable is from the Vercel environment variables */}
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "preview" ? (
+          <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-16 p-5 md:p-24">
+            <h2 className="font-mono text-5xl font-medium">Blog</h2>
+            <div className="h-max w-full max-w-7xl gap-5">
+              {blogPosts.map((post) => {
+                return <BlogCard key={post._id} post={post} />;
+              })}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </>
   );

@@ -12,7 +12,7 @@ export default function Note({
   variant?: "note" | "success" | "warning" | "error";
   className?: string;
 }): JSX.Element {
-  const types = {
+  const variants = {
     note: "!ring-[hsl(220,100%,94%)] bg-[hsl(220,100%,97%)] text-[hsl(208,100%,45%)] dark:!ring-[hsl(220,89%,16%)] dark:bg-[hsl(220,76%,10%)] dark:text-[hsl(220,100%,81%)]",
     success:
       "!ring-[hsl(145,92%,91%)] bg-[hsl(143,85%,96%)] text-[hsl(140,100%,27%)] dark:!ring-[hsl(147,100%,12%)] dark:bg-[hsl(150,100%,6%)] dark:text-[hsl(150,86%,65%)]",
@@ -23,7 +23,7 @@ export default function Note({
   };
 
   return (
-    <Card className={cn("ring-1 border-0", types[variant], className)}>
+    <Card className={cn("ring-1 border-0", variants[variant], className)}>
       <CardTitle className="p-4 pb-3 flex flex-row items-center gap-2">
         {title}
       </CardTitle>
